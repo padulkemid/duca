@@ -1,8 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import typography from './fonts';
+import fonts from './fonts';
 
 const theme = createMuiTheme({
-  ...typography,
+  typography: {
+    ...fonts,
+  },
   palette: {
     type: 'light',
   },

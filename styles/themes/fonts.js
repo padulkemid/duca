@@ -1,9 +1,10 @@
+const fonts = ['Poppins', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'];
 const typography = {
   h1: {
-    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: fonts.join(','),
   },
   h2: {
-    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: fonts.join(','),
   },
 };
 

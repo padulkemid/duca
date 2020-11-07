@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 // @material-ui core
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 // prop-types
@@ -15,23 +16,34 @@ import { lightMode, darkMode } from '../styles/themes';
 import '../styles/globals.scss';
 
 export default function App({ Component, pageProps }) {
-  const [mode, setMode] = useState(true);
-  const selectedMode = mode ? lightMode : darkMode;
+  const [mode, setMode] = useState(false);
+  const selectedMode = mode ? darkMode : lightMode;
+
+  function changeMode() {
+    const getMode = localStorage.getItem('darkMode');
+    const parsedMode = JSON.parse(getMode);
+    localStorage.setItem('darkMode', !parsedMode);
+    setMode(!parsedMode);
+  }
 
   useEffect(() => {
     // remove the server-side injected CSS. ( from material-ui )
     const jssStyles = document.querySelector('#jss-server-side');
 
     if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
-
-    // check local storage for theme mode
-    const getMode = localStorage.getItem('mode');
-    if (getMode === 'light') {
-      setMode(true);
-    } else {
-      setMode(false);
-    }
   }, []);
+
+  // store mode on localStorage
+  useEffect(() => {
+    const getMode = localStorage.getItem('darkMode');
+    setMode(JSON.parse(getMode));
+  }, []);
+
+  // pass mode to children
+  const modeAndPageProps = {
+    ...pageProps,
+    changeMode,
+  };
 
   return (
     <>
@@ -42,7 +54,8 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <ThemeProvider theme={selectedMode}>
-        <Component {...pageProps} />
+        <CssBaseline />
+        <Component {...modeAndPageProps} />
       </ThemeProvider>
     </>
   );

@@ -1,3 +1,6 @@
+// react
+import React from 'react';
+
 // next
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 

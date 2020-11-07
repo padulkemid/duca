@@ -7,6 +7,10 @@ const typography = {
     fontFamily: fonts.join(','),
     fontWeight: 600,
   },
+  h5: {
+    fontFamily: fonts.join(','),
+    fontWeight: 400,
+  },
 };
 
 export default typography;

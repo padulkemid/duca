@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SEO from '../components/seo';
 import Layout from '../components/layout';
 import Header from '../components/header';
+import Middle from '../components/middle';
 import ModeChange from '../components/mode_change';
 
 // TODO: change this
@@ -14,6 +15,7 @@ export default function Home({ changeMode }) {
       <ModeChange changeMode={changeMode} />
       <SEO />
       <Header />
+      <Middle />
     </Layout>
   );
 }

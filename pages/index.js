@@ -1,21 +1,20 @@
-// next
-import Head from 'next/head';
-
 // @material-ui core
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+
+// local components
+import SEO from '../components/seo';
+import Layout from '../components/layout';
+import Header from '../components/header';
 
 // TODO: change this
 export default function Home({ changeMode }) {
   return (
-    <>
-      <Head>
-        <title>anju geming</title>
-      </Head>
-      <Typography variant="h1">Yo wasap</Typography>
+    <Layout>
+      <SEO />
+      <Header />
       <Button variant="contained" onClick={changeMode}>
-        change theme
+        change mode
       </Button>
-    </>
+    </Layout>
   );
 }

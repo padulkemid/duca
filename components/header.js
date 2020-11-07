@@ -1,19 +1,36 @@
 // @material-ui core
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+
+// local components
+import LocationInfo from './weather/location_info';
+import WeatherCondition from './weather/weather_condition';
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(6),
+    borderRadius: '8px',
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(4),
+    },
+  },
+}));
 
 export default function Header() {
+  const classes = useStyles();
+
   return (
-    <Grid container spacing={2} direction="column" alignItems="flex-start">
-      <Grid item xs>
-        <Typography variant="h2">Bogor</Typography>
+    <Paper elevation={5} className={classes.paper}>
+      <Grid container spacing={5} justify="center" alignItems="center">
+        <Grid item xs>
+          <LocationInfo />
+        </Grid>
+        <Grid item xs>
+          <WeatherCondition />
+        </Grid>
       </Grid>
-      <Grid item xs>
-        <Typography variant="body1">Saturday, 7 November</Typography>
-      </Grid>
-      <Grid item xs>
-        <Typography variant="h4">Partly Cloudy</Typography>
-      </Grid>
-    </Grid>
+    </Paper>
   );
 }

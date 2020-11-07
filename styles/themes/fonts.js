@@ -5,6 +5,7 @@ const typography = {
   },
   h2: {
     fontFamily: fonts.join(','),
+    fontWeight: 600,
   },
 };
 

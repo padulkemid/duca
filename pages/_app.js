@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 // @material-ui core
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 // prop-types
@@ -54,7 +53,6 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <ThemeProvider theme={selectedMode}>
-        <CssBaseline />
         <Component {...modeAndPageProps} />
       </ThemeProvider>
     </>

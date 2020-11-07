@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 // @material-ui core
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,9 +15,11 @@ import Brightness3Icon from '@material-ui/icons/Brightness3';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
-  adjustLabel: {
+  adjustLocation: {
     width: '100%',
-    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  adjustLabel: {
     alignItems: 'flex-end',
   },
 });
@@ -38,14 +41,16 @@ export default function ModeChange({ changeMode }) {
   }, []);
 
   return (
-    <FormControlLabel
-      control={
-        <Switch checked={darkMode} onChange={handleChange} name="darkMode" />
-      }
-      label={darkMode ? <Brightness3Icon /> : <Brightness5Icon />}
-      className={classes.adjustLabel}
-      labelPlacement="end"
-    />
+    <FormGroup className={classes.adjustLocation}>
+      <FormControlLabel
+        control={
+          <Switch checked={darkMode} onChange={handleChange} name="darkMode" />
+        }
+        label={darkMode ? <Brightness3Icon /> : <Brightness5Icon />}
+        className={classes.adjustLabel}
+        labelPlacement="end"
+      />
+    </FormGroup>
   );
 }
 

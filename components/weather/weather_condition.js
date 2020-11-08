@@ -1,6 +1,12 @@
 // @material-ui core
 import { makeStyles } from '@material-ui/core/styles';
 
+// prop-types
+import PropTypes from 'prop-types';
+
+// local helpers
+import { translateWeatherCodesImage } from '../../utils/api_helper';
+
 const useStyles = makeStyles((theme) => ({
   image: {
     display: 'block',
@@ -11,9 +17,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function WeatherCondition() {
+
+export default function WeatherCondition({ condition }) {
   const classes = useStyles();
-  return (
-    <img src="/weather/rain.png" alt="Raining" className={classes.image} />
-  );
+  return translateWeatherCodesImage(condition, classes);
 }
+
+WeatherCondition.propTypes = {
+  condition: PropTypes.number.isRequired,
+};

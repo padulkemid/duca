@@ -10,13 +10,12 @@ import Middle from '../components/middle';
 import Bottom from '../components/bottom';
 import Footer from '../components/footer';
 
-// TODO: change this
-export default function Home({ changeMode }) {
+export default function Home({ changeMode, city }) {
   return (
     <Layout>
       <SEO />
       <ModeChange changeMode={changeMode} />
-      <Header />
+      <Header city={city} />
       <Middle />
       <Bottom />
       <Footer />
@@ -24,6 +23,23 @@ export default function Home({ changeMode }) {
   );
 }
 
+Home.defaultProps = {
+  city: '',
+};
+
 Home.propTypes = {
   changeMode: PropTypes.func.isRequired,
+  city: PropTypes.string,
 };
+
+export async function getServerSideProps(ctx) {
+  const { city } = ctx.query;
+
+  return {
+    props: {
+      ...(city && {
+        city,
+      }),
+    },
+  };
+}

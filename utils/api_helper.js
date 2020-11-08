@@ -1,6 +1,12 @@
 // local helpers
 import { Emoji } from './general_helper';
 
+function isDayTime() {
+  const hours = new Date().getHours();
+  if (hours > 6 && hours < 19) return true;
+  return false;
+}
+
 export async function dataFetcher(url) {
   const fetchData = await fetch(url);
   const data = await fetchData.json();
@@ -56,6 +62,7 @@ export function translateWeatherCodesEmoji(code) {
 
 export function translateWeatherCodesImage(code, classes) {
   const stringed = String(code);
+  const dayTime = isDayTime();
 
   if (stringed === '800') {
     return (
@@ -89,6 +96,10 @@ export function translateWeatherCodesImage(code, classes) {
   }
 
   return (
-    <img src="/weather/cloudy-1.png" alt="Clouds" className={classes.image} />
+    <img
+      src={dayTime ? '/weather/cloudy-1.png' : '/weather/night-1.png'}
+      alt="Clouds"
+      className={classes.image}
+    />
   );
 }

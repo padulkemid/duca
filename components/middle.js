@@ -53,9 +53,9 @@ function getMainConditionInfo({ temp, feelsLike, humidity, windSpeed }) {
   return data;
 }
 
-export default function Middle({ data }) {
+export default function Middle({ weather }) {
   const classes = useStyles();
-  const infos = getMainConditionInfo(data);
+  const infos = getMainConditionInfo(weather);
 
   return (
     <Grid container spacing={2} className={classes.grid}>
@@ -69,5 +69,5 @@ export default function Middle({ data }) {
 }
 
 Middle.propTypes = {
-  data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  weather: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };

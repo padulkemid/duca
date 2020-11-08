@@ -26,19 +26,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ data }) {
+export default function Header({ weather }) {
   const classes = useStyles();
 
   return (
     <Paper elevation={5} className={classes.paper}>
       <Grid container spacing={5} justify="center" alignItems="center">
-        {data ? (
+        {weather ? (
           <>
             <Grid item xs>
-              <LocationInfo {...data} />
+              <LocationInfo {...weather} />
             </Grid>
             <Grid item xs>
-              <WeatherCondition {...data} />
+              <WeatherCondition {...weather} />
             </Grid>
           </>
         ) : (
@@ -52,5 +52,5 @@ export default function Header({ data }) {
 }
 
 Header.propTypes = {
-  data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  weather: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };

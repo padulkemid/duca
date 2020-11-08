@@ -33,63 +33,43 @@ function getForecastsInfo(data) {
   return struct;
 }
 
-function getNearbyCircleAreas() {
-  const data = [
-    {
-      id: 1,
-      imgSrc: '/weather/storm.png',
-      imgAlt: 'Thunderstorm',
-      condition: 'Thunderstorm',
-      city: 'Jakarta',
-      temp: '26.92°C',
-    },
-    {
-      id: 2,
-      imgSrc: '/weather/cloudy-1.png',
-      imgAlt: 'Clouds',
-      condition: 'Broken Clouds',
-      city: 'Tangerang',
-      temp: '32.02°C',
-    },
-    {
-      id: 3,
-      imgSrc: '/weather/rain-2.png',
-      imgAlt: 'Rain',
-      condition: 'Light Rain',
-      city: 'Depok',
-      temp: '33.83°C',
-    },
-    {
-      id: 4,
-      imgSrc: '/weather/sun.png',
-      imgAlt: 'Sunny',
-      condition: 'Clear Sky',
-      city: 'Sukabumi',
-      temp: '34.02°C',
-    },
-  ];
+function getNearbyCircleAreasInfo(data) {
+  const struct = [];
 
-  return data;
+  for (let i = 0; i < data.length; i += 1) {
+    const { condition: weatherCode, city, weatherCondition, temp } = data[i];
+    const build = {
+      id: i,
+      code: weatherCode,
+      condition: weatherCondition,
+      temp,
+      city: city.split(' ')[0],
+    };
+
+    struct.push(build);
+  }
+
+  return struct;
 }
 
-export default function Bottom({ data }) {
+export default function Bottom({ forecasts, nearbyCircleAreas }) {
   const classes = useStyles();
-  const forecasts = getForecastsInfo(data);
-  const nearbyCircleAreas = getNearbyCircleAreas();
+  const forecastsInfo = getForecastsInfo(forecasts);
+  const nearbyCircleAreasInfo = getNearbyCircleAreasInfo(nearbyCircleAreas);
 
   return (
     <>
       <TitleBar text="Forecasts" />
       <Grid container spacing={2} className={classes.grid}>
-        {forecasts.map(({ id, ...info }) => (
+        {forecastsInfo.map(({ id, ...info }) => (
           <Grid item key={id} xs={12} md>
             <Forecasts {...info} />
           </Grid>
         ))}
       </Grid>
-      <TitleBar text="Nearby Circle Area" />
+      <TitleBar text="Nearby Circle Area From You" />
       <Grid container spacing={2} className={classes.grid}>
-        {nearbyCircleAreas.map(({ id, ...info }) => (
+        {nearbyCircleAreasInfo.map(({ id, ...info }) => (
           <Grid item key={id} xs={12} md={6} lg>
             <NearbyCircleArea {...info} />
           </Grid>

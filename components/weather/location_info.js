@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LocationInfo({ city, date, condition }) {
+export default function LocationInfo({ city, date, condition, dt }) {
   const classes = useStyles();
   return (
     <Grid container spacing={2} direction="column" alignItems="flex-start">

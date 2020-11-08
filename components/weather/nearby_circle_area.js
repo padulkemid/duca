@@ -10,6 +10,9 @@ import clsx from 'clsx';
 // prop-types
 import PropTypes from 'prop-types';
 
+// local helpers
+import { translateWeatherCodesImage } from '../../utils/api_helper';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(4),
@@ -42,13 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NearbyCircleArea({
-  imgSrc,
-  imgAlt,
-  city,
-  condition,
-  temp,
-}) {
+export default function NearbyCircleArea({ code, city, condition, temp }) {
   const classes = useStyles();
   return (
     <Paper elevation={5} className={classes.paper}>
@@ -59,11 +56,7 @@ export default function NearbyCircleArea({
         justify="center"
         alignItems="center">
         <Grid item xs={12} sm lg={12}>
-          <img
-            src={imgSrc}
-            alt={imgAlt}
-            className={clsx(classes.image, classes.centered)}
-          />
+          {translateWeatherCodesImage(code, classes)}
         </Grid>
         <Grid item xs={12} sm lg={12}>
           <Typography
@@ -82,7 +75,7 @@ export default function NearbyCircleArea({
             variant="h5"
             gutterBottom
             className={clsx(classes.temp, classes.centered)}>
-            {temp}
+            {`${temp}°C`}
           </Typography>
         </Grid>
       </Grid>
@@ -91,8 +84,7 @@ export default function NearbyCircleArea({
 }
 
 NearbyCircleArea.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
-  imgAlt: PropTypes.string.isRequired,
+  code: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   condition: PropTypes.string.isRequired,
   temp: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

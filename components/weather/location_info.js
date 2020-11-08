@@ -11,6 +11,9 @@ import { convertDate } from '../../utils/general_helper';
 import { translateWeatherCodesEmoji } from '../../utils/api_helper';
 
 const useStyles = makeStyles({
+  city: {
+    fontSize: '3rem',
+  },
   date: {
     fontSize: '0.9rem',
   },
@@ -19,12 +22,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LocationInfo({ city, date, condition, dt }) {
+export default function LocationInfo({ city, date, condition }) {
   const classes = useStyles();
   return (
     <Grid container spacing={2} direction="column" alignItems="flex-start">
       <Grid item xs>
-        <Typography variant="h2">{city}</Typography>
+        <Typography variant="h2" className={classes.city}>
+          {city}
+        </Typography>
       </Grid>
       <Grid item xs>
         <Typography variant="overline" className={classes.date}>

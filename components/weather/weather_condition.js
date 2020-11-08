@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function WeatherCondition({ condition }) {
+export default function Weathercode({ code }) {
   const classes = useStyles();
-  return translateWeatherCodesImage(condition, classes);
+  return translateWeatherCodesImage(code, classes);
 }
 
-WeatherCondition.propTypes = {
-  condition: PropTypes.number.isRequired,
+Weathercode.propTypes = {
+  code: PropTypes.number.isRequired,
 };

@@ -17,12 +17,12 @@ const useStyles = makeStyles({
   date: {
     fontSize: '0.9rem',
   },
-  condition: {
+  code: {
     fontSize: '1.8rem',
   },
 });
 
-export default function LocationInfo({ city, date, condition }) {
+export default function LocationInfo({ city, date, code }) {
   const classes = useStyles();
   return (
     <Grid container spacing={2} direction="column" alignItems="flex-start">
@@ -37,8 +37,8 @@ export default function LocationInfo({ city, date, condition }) {
         </Typography>
       </Grid>
       <Grid item xs>
-        <Typography variant="h5" className={classes.condition}>
-          {translateWeatherCodesEmoji(condition)}
+        <Typography variant="h5" className={classes.code}>
+          {translateWeatherCodesEmoji(code)}
         </Typography>
       </Grid>
     </Grid>
@@ -48,5 +48,5 @@ export default function LocationInfo({ city, date, condition }) {
 LocationInfo.propTypes = {
   city: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
-  condition: PropTypes.number.isRequired,
+  code: PropTypes.number.isRequired,
 };

@@ -42,6 +42,7 @@ export default function Home({ changeMode, city }) {
       setForecasts(newForecasts);
     }
 
+    // nearby circle can only be used with geolocation
     const newNearbyCircleAreas = await getNearbyCircleAreaInfo();
     setNearbyCircleAreas(newNearbyCircleAreas);
   }, []);

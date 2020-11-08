@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   loading: {
     display: 'block',
     margin: '0 auto',
+    color:
+      theme.palette.type === 'dark'
+        ? theme.palette.secondary.main
+        : theme.palette.primary.main,
   },
 }));
 

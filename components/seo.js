@@ -2,7 +2,7 @@
 import Head from 'next/head';
 
 export default function SEO() {
-  const title = '🌤️  Dukun Cuaca';
+  const title = '☁️  Dukun Cuaca';
   const webDesc = '🌤️  your average weather app';
 
   return (

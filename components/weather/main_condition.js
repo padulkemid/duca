@@ -1,5 +1,6 @@
 // @material-ui core
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +18,14 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     width: '50%',
   },
+  loading: {
+    display: 'block',
+    margin: '0 auto',
+    color:
+      theme.palette.type === 'dark'
+        ? theme.palette.secondary.main
+        : theme.palette.primary.main,
+  },
 }));
 
 export default function MainCondition({ imgSrc, imgAlt, infoName, infoValue }) {
@@ -32,7 +41,11 @@ export default function MainCondition({ imgSrc, imgAlt, infoName, infoValue }) {
           <Typography variant="overline" gutterBottom>
             {infoName}
           </Typography>
-          <Typography variant="h5">{infoValue}</Typography>
+          {infoValue.includes('undefined') ? (
+            <CircularProgress size="2rem" className={classes.loading} />
+          ) : (
+            <Typography variant="h5">{infoValue}</Typography>
+          )}
         </Grid>
       </Grid>
     </Paper>

@@ -2,6 +2,9 @@
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
+// prop-types
+import PropTypes from 'prop-types';
+
 // local components
 import TitleBar from './title_bar';
 import Forecasts from './weather/forecasts';
@@ -17,12 +20,12 @@ function getForecastsInfo(data) {
   const struct = [];
 
   for (let i = 0; i < data.length; i += 1) {
-    const { temp, condition, date } = data[i];
-    const { id: weatherCode, main: weatherCondition } = condition;
+    const { temp, weatherData, date } = data[i];
+    const { id: code, main: condition } = weatherData;
     const build = {
       id: i,
-      code: weatherCode,
-      condition: weatherCondition,
+      code,
+      condition,
       temp,
       date,
     };
@@ -37,12 +40,13 @@ function getNearbyCircleAreasInfo(data) {
   const struct = [];
 
   for (let i = 0; i < data.length; i += 1) {
-    const { condition: weatherCode, city, weatherCondition, temp } = data[i];
+    const { code, city, condition, temp } = data[i];
     const build = {
       id: i,
-      code: weatherCode,
-      condition: weatherCondition,
+      code,
+      condition,
       temp,
+      // TODO: think! contains city more than 2 words might be just pick the first letter :p
       city: city.split(' ')[0],
     };
 
@@ -59,7 +63,7 @@ export default function Bottom({ forecasts, nearbyCircleAreas }) {
 
   return (
     <>
-      <TitleBar text="Forecasts" />
+      {forecasts && <TitleBar text="Forecasts" />}
       <Grid container spacing={2} className={classes.grid}>
         {forecastsInfo.map(({ id, ...info }) => (
           <Grid item key={id} xs={12} md>
@@ -67,7 +71,7 @@ export default function Bottom({ forecasts, nearbyCircleAreas }) {
           </Grid>
         ))}
       </Grid>
-      <TitleBar text="Nearby Circle Area From You" />
+      {nearbyCircleAreas && <TitleBar text="Nearby Circle Area From You" />}
       <Grid container spacing={2} className={classes.grid}>
         {nearbyCircleAreasInfo.map(({ id, ...info }) => (
           <Grid item key={id} xs={12} md={6} lg>
@@ -78,3 +82,9 @@ export default function Bottom({ forecasts, nearbyCircleAreas }) {
     </>
   );
 }
+
+Bottom.propTypes = {
+  forecasts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
+  nearbyCircleAreas: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+};

@@ -1,8 +1,12 @@
 // @material-ui core
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
+
+// local helpers
+import { Emoji } from '../utils/general_helper';
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -10,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   padulkemid: {
     paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     fontSize: '1.2rem',
   },
   link: {
@@ -26,14 +31,24 @@ export default function Footer() {
   return (
     <Box className={classes.box}>
       <Divider />
-      <Typography
-        variant="h5"
-        align="right"
-        className={classes.padulkemid}
-        gutterBottom>
-        + padulkemid - &copy;
-        {` ${new Date().getFullYear()}`}
-      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs>
+          <Typography variant="h5" className={classes.padulkemid} gutterBottom>
+            Dukun Cuaca
+            <Emoji symbol="🌤️" label="Sun" />
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Typography
+            variant="h5"
+            align="right"
+            className={classes.padulkemid}
+            gutterBottom>
+            + padulkemid - &copy;
+            {` ${new Date().getFullYear()}`}
+          </Typography>
+        </Grid>
+      </Grid>
       <Typography variant="body2" align="right">
         this webpage is intended for fullstack developer entry test at
         {'\n'}

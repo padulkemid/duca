@@ -18,12 +18,12 @@ export default function App({ Component, pageProps }) {
   const [mode, setMode] = useState(false);
   const selectedMode = mode ? darkMode : lightMode;
 
-  function changeMode() {
+  const changeMode = () => {
     const getMode = localStorage.getItem('darkMode');
     const parsedMode = JSON.parse(getMode);
     localStorage.setItem('darkMode', !parsedMode);
     setMode(!parsedMode);
-  }
+  };
 
   useEffect(() => {
     // remove the server-side injected CSS. ( from material-ui )

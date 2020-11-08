@@ -14,11 +14,16 @@ import Bottom from '../components/bottom';
 import Footer from '../components/footer';
 
 // local libraries
-import { getWeatherInfo, getForecastInfo } from '../lib/weather';
+import {
+  getWeatherInfo,
+  getForecastInfo,
+  getNearbyCircleAreaInfo,
+} from '../lib/weather';
 
 export default function Home({ changeMode, city }) {
   const [weather, setWeather] = useState(false);
   const [forecasts, setForecasts] = useState(false);
+  const [nearbyCircleAreas, setNearbyCircleAreas] = useState(false);
 
   useEffect(async () => {
     if (city && city.length) {
@@ -36,15 +41,18 @@ export default function Home({ changeMode, city }) {
       setWeather(newWeather);
       setForecasts(newForecasts);
     }
+
+    const newNearbyCircleAreas = await getNearbyCircleAreaInfo();
+    setNearbyCircleAreas(newNearbyCircleAreas);
   }, []);
 
   return (
     <Layout>
       <SEO />
       <ModeChange changeMode={changeMode} />
-      <Header data={weather} />
-      <Middle data={weather} />
-      <Bottom data={forecasts} />
+      <Header weather={weather} />
+      <Middle weather={weather} />
+      <Bottom forecasts={forecasts} nearbyCircleAreas={nearbyCircleAreas} />
       <Footer />
     </Layout>
   );

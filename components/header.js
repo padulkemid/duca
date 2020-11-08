@@ -1,6 +1,3 @@
-// react
-import { useEffect, useState } from 'react';
-
 // @material-ui core
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -14,9 +11,6 @@ import PropTypes from 'prop-types';
 import LocationInfo from './weather/location_info';
 import WeatherCondition from './weather/weather_condition';
 
-// local libraries
-import { getWeatherInfo } from '../lib/weather';
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
@@ -26,23 +20,14 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4),
     },
   },
+  loading: {
+    display: 'block',
+    margin: '0 auto',
+  },
 }));
 
-export default function Header({ city }) {
+export default function Header({ data }) {
   const classes = useStyles();
-  const [data, setData] = useState(false);
-
-  useEffect(async () => {
-    if (city && city.length) {
-      const newData = await getWeatherInfo('city', city);
-      setData(newData);
-    }
-
-    if (!city) {
-      const newData = await getWeatherInfo('geo');
-      setData(newData);
-    }
-  }, []);
 
   return (
     <Paper elevation={5} className={classes.paper}>
@@ -58,7 +43,7 @@ export default function Header({ city }) {
           </>
         ) : (
           <Grid item xs>
-            <CircularProgress size="2rem" />
+            <CircularProgress size="2rem" className={classes.loading} />
           </Grid>
         )}
       </Grid>
@@ -66,10 +51,6 @@ export default function Header({ city }) {
   );
 }
 
-Header.defaultProps = {
-  city: '',
-};
-
 Header.propTypes = {
-  city: PropTypes.string,
+  data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };

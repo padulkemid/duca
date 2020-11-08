@@ -2,6 +2,9 @@
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
+// prop-types
+import PropTypes from 'prop-types';
+
 // local components
 import MainCondition from './weather/main_condition';
 
@@ -9,9 +12,13 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     paddingTop: theme.spacing(3),
   },
+  loading: {
+    display: 'block',
+    margin: '0 auto',
+  },
 }));
 
-function getMainConditionInfo({ temp, feelsLike, humidity, wind }) {
+function getMainConditionInfo({ temp, feelsLike, humidity, windSpeed }) {
   const data = [
     {
       id: 1,
@@ -39,24 +46,17 @@ function getMainConditionInfo({ temp, feelsLike, humidity, wind }) {
       imgSrc: '/weather/tornado.png',
       imgAlt: 'Wind Speed in Meter per Second',
       infoName: 'Wind',
-      infoValue: `${wind} m/s`,
+      infoValue: `${windSpeed} m/s`,
     },
   ];
 
   return data;
 }
 
-export default function Middle() {
+export default function Middle({ data }) {
   const classes = useStyles();
+  const infos = getMainConditionInfo(data);
 
-  // TODO: add real values
-  const datas = {
-    temp: 28.34,
-    feelsLike: 32.66,
-    humidity: 70,
-    wind: 3.1,
-  };
-  const infos = getMainConditionInfo(datas);
   return (
     <Grid container spacing={2} className={classes.grid}>
       {infos.map(({ id, ...info }) => (
@@ -67,3 +67,7 @@ export default function Middle() {
     </Grid>
   );
 }
+
+Middle.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+};

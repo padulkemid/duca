@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import ModeChange from '../components/mode_change';
+import LocationError from '../components/location_error';
 import Header from '../components/header';
 import Middle from '../components/middle';
 import Bottom from '../components/bottom';
@@ -51,8 +52,22 @@ export default function Home({ changeMode, city }) {
     <Layout>
       <SEO />
       <ModeChange changeMode={changeMode} />
-      <Header weather={weather} />
-      <Middle weather={weather} />
+      {/*
+        this is a redundant code, well actually why I write this in double bang..
+        of course, I need the bool value without writing the full complete (city && city.length)..
+        its the same but its really bad to use, I'm sorry..
+
+        it works without it, its just a minor cleanup because the location error still spawns for a
+        milliseconds.
+      */}
+      {weather || !!city ? (
+        <>
+          <Header weather={weather} />
+          <Middle weather={weather} />
+        </>
+      ) : (
+        <LocationError />
+      )}
       <Bottom forecasts={forecasts} nearbyCircleAreas={nearbyCircleAreas} />
       <Footer />
     </Layout>

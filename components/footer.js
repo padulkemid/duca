@@ -62,6 +62,18 @@ export default function Footer() {
         !
       </Typography>
       <Typography variant="body2" align="right">
+        you could find the source code right
+        {'\n'}
+        <a
+          href="https://github.com/padulkemid/duca"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={classes.link}>
+          here
+        </a>
+        !
+      </Typography>
+      <Typography variant="body2" align="right">
         icons were made by
         {'\n'}
         <a

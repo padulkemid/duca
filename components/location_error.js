@@ -2,7 +2,8 @@
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   shout: {
@@ -31,10 +32,14 @@ const useStyles = makeStyles((theme) => ({
       width: '80%',
     },
   },
+  loading: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function LocationError() {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Paper elevation={5} className={classes.paper}>
@@ -43,6 +48,10 @@ export default function LocationError() {
           <Typography variant="h2" className={classes.shout}>
             Oh shoot!
           </Typography>
+          <LinearProgress
+            color={theme.palette.type === 'dark' ? 'secondary' : 'primary'}
+            className={classes.loading}
+          />
         </Grid>
         <Grid item xs>
           <Typography variant="h5" className={classes.error} gutterBottom>

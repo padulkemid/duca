@@ -18,7 +18,7 @@
   - **Formik** and **yup** as form component and validation.
   - **PropTypes** as the props and type checker.
 
-## Contributing 🤜🤛
+## Local Development 🤜🤛
 
   1. Clone this repo.
   2. I recommend you to use `yarn` but if you want to do this with `npm`, make
@@ -39,7 +39,5 @@
 
 ## Footnotes 👣
 
-  This web app is intended for fullstack developer entry test at
-  [maxsol](https://maxsol.id), wish me luck. 😊  
   Leave a star ⭐ if you like it!
 

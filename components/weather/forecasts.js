@@ -52,7 +52,7 @@ export default function Forecasts({ code, condition, temp, date }) {
         </Grid>
         <Grid item xs>
           <Typography variant="overline">
-            {convertDate(date).slice(25)}
+            {convertDate(date).split(',')[3]}
           </Typography>
         </Grid>
       </Grid>

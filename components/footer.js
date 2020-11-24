@@ -50,16 +50,16 @@ export default function Footer() {
         </Grid>
       </Grid>
       <Typography variant="body2" align="right">
-        this webpage is intended for fullstack developer entry test at
+        thank you very much for coming here! visit my blog to read some
         {'\n'}
         <a
-          href="https://maxsol.id"
+          href="https://padulkem.id"
           target="_blank"
           rel="noopener noreferrer"
           className={classes.link}>
-          maxsol
+          stories
         </a>
-        .
+        !
       </Typography>
       <Typography variant="body2" align="right">
         icons were made by
